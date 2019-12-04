@@ -8,8 +8,7 @@ In particular, it contains the Unleash server that is used by the `carts` micros
 Apply the manifest to your Kubernetes cluster. We recommend using a separate namespace called `unleash` for running the Unleash server.
 
 ```console
-kubectl create namespace unleash
-kubectl apply -f deploy/unleash-server.yaml -n unleash
+kubectl apply -f deploy/unleash-server.yaml
 ```
 
 Access the Unleash server by getting the IP address of it:
