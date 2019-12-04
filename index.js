@@ -69,7 +69,7 @@ function onEventHook(event, eventData) {
 }
 
 const options = {
-  eventHook: onEventHook,
+  // eventHook: onEventHook,
   adminAuthentication: 'custom',
   secret: 'mysecret',
   preRouterHook: basicAuthentication,
