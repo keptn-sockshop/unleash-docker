@@ -1,8 +1,14 @@
 ---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: unleash
+---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: unleash-db-volume
+  namespace: unleash
   labels:
     type: local
     app: unleash
@@ -19,6 +25,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: unleash-db-claim
+  namespace: unleash
   labels:
     app: unleash
 spec:
@@ -33,6 +40,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: unleash-db-config
+  namespace: unleash
   labels:
     app: unleash-db
 data:
@@ -44,6 +52,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: unleash-db
+  namespace: unleash
   labels:
     app: unleash-db
 spec:
@@ -57,6 +66,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: unleash-db
+  namespace: unleash
 spec:
   replicas: 1
   template:
@@ -88,6 +98,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: unleash-server
+  namespace: unleash
   labels:
     app: unleash-server
 spec:
@@ -100,7 +111,7 @@ spec:
       containers:
       - name: unleash-server
         #image: unleashorg/unleash-server:3.2.14
-        image: jetzlstorfer/unleash-server-basicauth:0.1
+        image: jetzlstorfer/unleash-server:0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 4242
@@ -122,6 +133,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: unleash-server-service
+  namespace: unleash
   annotations:
     service.alpha.kubernetes.io/app-protocols: '{"http-port":"HTTP"}'
   labels:
@@ -139,6 +151,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: unleash-server-ingress
+  namespace: unleash
   labels:
     app: unleash-server
   annotations:
